@@ -1,0 +1,40 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <ItemGroup>
+        <AvailableItemName Include="TailwindCSS" />
+    </ItemGroup>
+
+    <Target Name="CompileTailwindCSS" AfterTargets="BeforeBuild" Condition="@(TailwindCSS->Count()) > 0">
+        <CallTarget Targets="CheckIfNodeJSIsInstalled" />
+        <CallTarget Targets="InstallTailwindCSS" />
+
+        <Exec Command="node $(MSBuildThisFileDirectory)../node_modules/.bin/postcss @(TailwindCSS->'%(FullPath)') -o @(TailwindCSS->'%(RootDir)%(Directory)%(Filename).css') --no-map"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
+    </Target>
+
+    <Target Name="CheckIfNodeJSIsInstalled">
+        <PropertyGroup>
+            <!-- Send the output to null to keep the log clean -->
+            <NodeTestCommand Condition="$(OS) == Windows_NT">node -v &gt; NUL</NodeTestCommand>
+            <NodeTestCommand Condition="$(OS) != Windows_NT">node -v &gt; /dev/null</NodeTestCommand>
+        </PropertyGroup>
+
+        <Exec Command="$(NodeTestCommand)" IgnoreExitCode="true" EchoOff="true">
+            <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+        </Exec>
+
+        <Error Text="Node.js must be installed in order to generate tailwind css!" Condition="$(ExitCode) != 0" />
+    </Target>
+
+    <Target Name="InstallTailwindCSS" Condition="!Exists('$(MSBuildThisFileDirectory)../node_modules')">
+        <Exec Command="npm install postcss"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
+        <Exec Command="npm install postcss-cli"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
+        <Exec Command="npm install postcss-import"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
+        <Exec Command="npm install postcss-nesting"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
+        <Exec Command="npm install tailwindcss"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
+    </Target>
+</Project>
