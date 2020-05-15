@@ -6,7 +6,7 @@
     <PackageId>BamButz.MSBuild.TailwindCSS</PackageId>
     <Version>1.0.0</Version>
     <Authors>BamButz</Authors>
-    <Description>Package adds a build task "TailwindCSS" that will send marked files to postcss with tailwindcss plugin configured</Description>
+    <Description>Package adds a build action "TailwindCSS" that will send marked files to postcss with tailwindcss plugin configured</Description>
     <PackageTags>TailwindCSS;MSBuild;Stylesheets;Web</PackageTags>
     <Copyright>Copyright 2020 © BamButz</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
