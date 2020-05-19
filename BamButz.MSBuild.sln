@@ -7,6 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sources", "sources", "{B9EB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BamButz.MSBuild.TailwindCSS", "sources\BamButz.MSBuild.TailwindCSS\BamButz.MSBuild.TailwindCSS.csproj", "{4ED6CC27-9381-46A5-87BE-08AB494C6A36}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Files", "_Solution Files", "{9687E792-046C-45B5-B2CE-3AF090980B0F}"
+ProjectSection(SolutionItems) = preProject
+	README.md = README.md
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
