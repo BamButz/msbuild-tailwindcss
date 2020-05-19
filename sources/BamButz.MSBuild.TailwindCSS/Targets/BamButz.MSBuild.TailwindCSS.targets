@@ -26,13 +26,19 @@
     </Target>
 
     <Target Name="InstallTailwindCSS" Condition="!Exists('$(MSBuildThisFileDirectory)../node_modules')">
-        <Exec Command="npm install postcss"
-              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
-        <Exec Command="npm install postcss-cli"
-              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
-        <Exec Command="npm install postcss-nesting"
-              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
-        <Exec Command="npm install tailwindcss"
-              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
+        <Message Text="Installing required npm packages for tailwindcss" Importance="high" />
+        
+        <Exec Command="npm install postcss --silent"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../"
+              EchoOff="true" />
+        <Exec Command="npm install postcss-cli --silent"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../"
+              EchoOff="true" />
+        <Exec Command="npm install postcss-nesting --silent"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../"
+              EchoOff="true" />
+        <Exec Command="npm install tailwindcss --silent"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../"
+              EchoOff="true" />
     </Target>
 </Project>

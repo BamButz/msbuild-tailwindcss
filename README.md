@@ -6,6 +6,12 @@
 
 Package adds a build action "TailwindCSS" that will send marked files to postcss with tailwindcss plugin configured
 
+Activated PostCSS Plugins:
+
+- tailwindcss
+- nesting
+- autoprefixer
+
 # Installation
 
 The extension can be retrieved via [nuget.org](https://www.nuget.org/packages/BamButz.MSBuild.TailwindCSS/)

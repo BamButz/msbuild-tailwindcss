@@ -15,9 +15,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="BamButz.MSBuild.TailwindCSS.targets" PackagePath="build" />
-    <Content Include="BamButz.MSBuild.TailwindCSS.targets" PackagePath="buildMultiTargeting" />
-    <Content Include="index.js" PackagePath="" />
+    <Content Include="index.js" />
+    <Content Include="Targets\BamButz.MSBuild.TailwindCSS.targets">
+      <PackagePath>build</PackagePath>
+    </Content>
+    <Content Include="Targets\BamButz.MSBuild.TailwindCSS.targets">
+      <PackagePath>buildMultiTargeting</PackagePath>
+    </Content>
   </ItemGroup>
 
   <!-- Testconfiguration -->
@@ -26,6 +30,6 @@
     <TailwindCSS Include="Test/Tailwind.scss" />
   </ItemGroup>
 
-  <Import Project="BamButz.MSBuild.TailwindCSS.targets" Condition="$(Configuration) == 'Debug'" />
+  <Import Project="Targets\BamButz.MSBuild.TailwindCSS.targets" Condition="$(Configuration) == 'Debug'" />
 
 </Project>
