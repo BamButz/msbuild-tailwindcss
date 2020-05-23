@@ -10,7 +10,7 @@ Activated PostCSS Plugins:
 
 - tailwindcss
 - nesting
-- autoprefixer
+- cssnano
 
 # Installation
 
@@ -20,14 +20,10 @@ The extension can be retrieved via [nuget.org](https://www.nuget.org/packages/Ba
 
 # Usage
 
-Simply set the build action of your stylesheet to TailwindCSS  
+Simply set the build action of your stylesheet to TailwindCSS during build the extension will output a file with .min.css extension and the same name and location as its source file
+
 I set up a test file in the project so that you can understand the usage.
 
-# Known limitations
+# Contribution
 
-At the moment, the generated stylesheet is simply named "filename".css, so I recommend using the .scss file extension for the source file
-
-Sourcefile -> source.scss  
-Generated file -> source.css
-
-If you have a better naming strategy, don't be afraid to open an issue. 🙂
+If you have any ideas to improve this extension, don't be afraid to open an issue. 🙂

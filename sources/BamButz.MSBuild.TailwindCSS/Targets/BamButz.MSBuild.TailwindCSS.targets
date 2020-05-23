@@ -7,7 +7,7 @@
         <CallTarget Targets="CheckIfNodeJSIsInstalled" />
         <CallTarget Targets="InstallTailwindCSS" />
 
-        <Exec Command="node $(MSBuildThisFileDirectory)../index.js @(TailwindCSS->'%(FullPath)') @(TailwindCSS->'%(RootDir)%(Directory)%(Filename).css')"
+        <Exec Command="node $(MSBuildThisFileDirectory)../index.js @(TailwindCSS->'%(FullPath)') @(TailwindCSS->'%(RootDir)%(Directory)%(Filename).min.css')"
               WorkingDirectory="$(MSBuildThisFileDirectory)../" />
     </Target>
 
@@ -38,6 +38,9 @@
               WorkingDirectory="$(MSBuildThisFileDirectory)../"
               EchoOff="true" />
         <Exec Command="npm install tailwindcss --silent"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../"
+              EchoOff="true" />
+        <Exec Command="npm install cssnano --silent"
               WorkingDirectory="$(MSBuildThisFileDirectory)../"
               EchoOff="true" />
     </Target>
