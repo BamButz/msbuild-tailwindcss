@@ -1,12 +1,21 @@
 const postcss = require('postcss');
-const tailwindcss = require('tailwindcss');
+let tailwindcss = require('tailwindcss');
 const nesting = require('postcss-nesting');
 const cssnano = require('cssnano');
 const fs = require('fs');
+const path = require('path');
 
 async function main() {
     try {
         const cmdArgs = process.argv.slice(2);
+        
+        const projectDir = cmdArgs[2];
+        const configPath = path.join(projectDir, "tailwind.config.js");
+        if (fs.existsSync(configPath)) {
+            console.log("config exists")
+            tailwindcss = tailwindcss(configPath);
+        }
+        
         const input = fs.readFileSync(cmdArgs[0]);
         const output = await postcss()
             .use(tailwindcss)

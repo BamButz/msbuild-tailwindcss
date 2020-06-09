@@ -7,7 +7,7 @@
         <CallTarget Targets="CheckIfNodeJSIsInstalled" />
         <CallTarget Targets="InstallTailwindCSS" />
 
-        <Exec Command="node $(MSBuildThisFileDirectory)../index.js @(TailwindCSS->'%(FullPath)') @(TailwindCSS->'%(RootDir)%(Directory)%(Filename).min.css')"
+        <Exec Command="node $(MSBuildThisFileDirectory)../index.js &quot;@(TailwindCSS->'%(FullPath)')&quot; &quot;@(TailwindCSS->'%(RootDir)%(Directory)%(Filename).min.css')&quot; &quot;$(ProjectDir)&quot;"
               WorkingDirectory="$(MSBuildThisFileDirectory)../" />
     </Target>
 
