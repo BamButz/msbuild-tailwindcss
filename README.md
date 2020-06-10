@@ -24,6 +24,10 @@ Simply set the build action of your stylesheet to TailwindCSS during build the e
 
 I set up a test file in the project so that you can understand the usage.
 
+## Custom Configuration
+
+If you need to use a custom configuration, you can simply create a tailwind.config.js in the same directory as your project file (.csproj).
+
 # Contribution
 
 If you have any ideas to improve this extension, don't be afraid to open an issue. 🙂
