@@ -23,7 +23,7 @@ async function main() {
             .use(cssnano)
             .process(input, {from: cmdArgs[0], to: cmdArgs[1]});
 
-        fs.writeFileSync(cmdArgs[1], output);
+        fs.writeFileSync(cmdArgs[1], output.toString());
     } catch(error) {
         console.error(error);
         process.exit(1);
