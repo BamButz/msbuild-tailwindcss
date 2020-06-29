@@ -1,8 +1,8 @@
 # Welcome to MSBuild TailwindCSS 👋
 
-![Nuget](https://img.shields.io/nuget/v/BamButz.MSBuild.TailwindCSS)
-![Nuget](https://img.shields.io/nuget/dt/BamButz.MSBuild.TailwindCSS)
-![GitHub](https://img.shields.io/github/license/BamButz/msbuild-tailwindcss)
+[![Nuget](https://img.shields.io/nuget/v/BamButz.MSBuild.TailwindCSS)](https://www.nuget.org/packages/BamButz.MSBuild.TailwindCSS/)
+[![Nuget](https://img.shields.io/nuget/dt/BamButz.MSBuild.TailwindCSS)](https://www.nuget.org/packages/BamButz.MSBuild.TailwindCSS/)
+[![GitHub](https://img.shields.io/github/license/BamButz/msbuild-tailwindcss)](LICENSE)
 
 Package adds a build action "TailwindCSS" that will send marked files to postcss with tailwindcss plugin configured
 
