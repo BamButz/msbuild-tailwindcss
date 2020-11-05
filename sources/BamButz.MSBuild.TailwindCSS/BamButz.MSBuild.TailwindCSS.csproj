@@ -30,6 +30,7 @@
 
   <ItemGroup Condition="$(Configuration) == 'Debug'">
     <TailwindCSS Include="Test/Tailwind.scss" />
+    <TailwindCSS Include="Test/Second-Tailwind.scss" />
   </ItemGroup>
 
   <Import Project="Targets\BamButz.MSBuild.TailwindCSS.targets" Condition="$(Configuration) == 'Debug'" />
