@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sources", "sources", "{B9EBA61B-9453-46ED-95B9-CA04D0F907EB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BamButz.MSBuild.TailwindCSS", "sources\BamButz.MSBuild.TailwindCSS\BamButz.MSBuild.TailwindCSS.csproj", "{4ED6CC27-9381-46A5-87BE-08AB494C6A36}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Files", "_Solution Files", "{9687E792-046C-45B5-B2CE-3AF090980B0F}"
@@ -39,6 +37,5 @@ Global
 		{4ED6CC27-9381-46A5-87BE-08AB494C6A36}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4ED6CC27-9381-46A5-87BE-08AB494C6A36} = {B9EBA61B-9453-46ED-95B9-CA04D0F907EB}
 	EndGlobalSection
 EndGlobal
