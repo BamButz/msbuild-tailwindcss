@@ -44,7 +44,6 @@ PluginsOut = pluginsItems.ToArray();
 
     <Target Name="CompileTailwindCSS" AfterTargets="BeforeBuild" Condition="@(TailwindCSS->Count()) > 0">
         <CallTarget Targets="CheckIfNodeJSIsInstalled" />
-
         <CallTarget Targets="InstallTailwindCSS" />
 
         <Exec Command="node $(MSBuildThisFileDirectory)../index.js &quot;%(TailwindCSS.FullPath)&quot; &quot;%(TailwindCSS.RootDir)%(TailwindCSS.Directory)%(TailwindCSS.Filename).min.css&quot; &quot;$(ProjectDir.TrimEnd('\'))&quot;"
@@ -65,8 +64,7 @@ PluginsOut = pluginsItems.ToArray();
         <Error Text="Node.js must be installed in order to generate tailwind css!" Condition="$(ExitCode) != 0" />
     </Target>
 
-    <Target Name="InstallTailwindCSS"
-            Condition="!Exists('$(MSBuildThisFileDirectory)../node_modules')">
+    <Target Name="InstallTailwindCSS" Condition="!Exists('$(MSBuildThisFileDirectory)../node_modules')">
         <Message Text="Installing required npm packages for tailwindcss" Importance="high" />
         
         <Exec Command="npm install postcss --silent"
