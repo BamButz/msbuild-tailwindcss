@@ -26,8 +26,9 @@ if (!File.Exists(ConfigFilePath))
 
 var cfgFileStr = File.ReadAllText(ConfigFilePath);
 var cfgJson = cfgFileStr.Split(new string[]{"module.exports = "}, StringSplitOptions.None)[1];
-cfgJson = Regex.Replace(cfgJson, @"require\('(.*)'\)", "\"$1\"");
+cfgJson = Regex.Replace(cfgJson, @"require\(['""](.*)['""]\)", @"""$1""");
 var pluginsArrStr = Regex.Replace(cfgJson, @"(?:{.*plugins: \[)(.*)(?:\].*})", "$1", RegexOptions.Singleline);
+pluginsArrStr = pluginsArrStr.Replace("\n", String.Empty);
 var plugins = pluginsArrStr.Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
 
 var pluginsItems = new List<ITaskItem>(plugins.Count);
@@ -44,15 +45,7 @@ PluginsOut = pluginsItems.ToArray();
     <Target Name="CompileTailwindCSS" AfterTargets="BeforeBuild" Condition="@(TailwindCSS->Count()) > 0">
         <CallTarget Targets="CheckIfNodeJSIsInstalled" />
 
-        <GetTailwindPluginsList ConfigFilePath="$(ProjectDir)/tailwind.config.js">
-            <Output ItemName="Plugins" TaskParameter="PluginsOut" />
-        </GetTailwindPluginsList>
-
         <CallTarget Targets="InstallTailwindCSS" />
-
-        <Exec Command="npm install \%(Plugins.Identity) --silent"
-              Condition="!Exists('$(MSBuildThisFileDirectory)../node_modules')"
-              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
 
         <Exec Command="node $(MSBuildThisFileDirectory)../index.js &quot;%(TailwindCSS.FullPath)&quot; &quot;%(TailwindCSS.RootDir)%(TailwindCSS.Directory)%(TailwindCSS.Filename).min.css&quot; &quot;$(ProjectDir.TrimEnd('\'))&quot; [&quot;@(PluginList, '&quot;,&quot;')&quot;]"
               WorkingDirectory="$(MSBuildThisFileDirectory)../" />
@@ -89,6 +82,14 @@ PluginsOut = pluginsItems.ToArray();
               WorkingDirectory="$(MSBuildThisFileDirectory)../"
               EchoOff="true" />
         <Exec Command="npm install cssnano --silent"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../"
+              EchoOff="true" />
+
+        <!-- Install plugins -->
+        <GetTailwindPluginsList ConfigFilePath="$(ProjectDir)/tailwind.config.js">
+            <Output ItemName="Plugins" TaskParameter="PluginsOut" />
+        </GetTailwindPluginsList>
+        <Exec Command="npm install %(Plugins.Identity) --silent"
               WorkingDirectory="$(MSBuildThisFileDirectory)../"
               EchoOff="true" />
     </Target>
