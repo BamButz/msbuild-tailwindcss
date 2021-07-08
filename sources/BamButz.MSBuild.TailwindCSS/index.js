@@ -12,8 +12,12 @@ async function main() {
         const projectDir = cmdArgs[2];
         const configPath = path.join(projectDir, "tailwind.config.js");
         if (fs.existsSync(configPath)) {
-            console.log("config exists")
-            tailwindcss = tailwindcss(configPath);
+            // File tailwind.config.js will be created or overwritten by default.
+            fs.copyFile(configPath, 'tailwind.config.js', (err) => {
+                if (err) throw err;
+                console.log('config exists and was copied to build folder');
+            });
+            tailwindcss = tailwindcss("tailwind.config.js");
         }
         
         const input = fs.readFileSync(cmdArgs[0]);

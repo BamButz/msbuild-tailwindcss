@@ -28,6 +28,23 @@ I set up a test file in the project so that you can understand the usage.
 
 If you need to use a custom configuration, you can simply create a tailwind.config.js in the same directory as your project file (.csproj).
 
+## Plugins
+
+If you want to use any of the [official tailwindcss plugins](https://tailwindcss.com/docs/plugins#official-plugins) you can simply specify them in your tailwind.config.js file (see example below) and they will automatically be installed at the next build.
+
+```js
+// tailwind.config.js
+module.exports = {
+  // ...
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/aspect-ratio'),
+  ]
+}
+```
+
 # Contribution
 
 If you have any ideas to improve this extension, don't be afraid to open an issue. 🙂
