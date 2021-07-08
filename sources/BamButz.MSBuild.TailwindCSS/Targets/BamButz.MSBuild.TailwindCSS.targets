@@ -51,6 +51,7 @@ PluginsOut = pluginsItems.ToArray();
         <CallTarget Targets="InstallTailwindCSS" />
 
         <Exec Command="npm install \%(Plugins.Identity) --silent"
+              Condition="!Exists('$(MSBuildThisFileDirectory)../node_modules')"
               WorkingDirectory="$(MSBuildThisFileDirectory)../" />
 
         <Exec Command="node $(MSBuildThisFileDirectory)../index.js &quot;%(TailwindCSS.FullPath)&quot; &quot;%(TailwindCSS.RootDir)%(TailwindCSS.Directory)%(TailwindCSS.Filename).min.css&quot; &quot;$(ProjectDir.TrimEnd('\'))&quot; [&quot;@(PluginList, '&quot;,&quot;')&quot;]"
