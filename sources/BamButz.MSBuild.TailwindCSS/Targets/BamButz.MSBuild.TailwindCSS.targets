@@ -3,11 +3,57 @@
         <AvailableItemName Include="TailwindCSS" />
     </ItemGroup>
 
+    <UsingTask
+        TaskName="GetTailwindPluginsList"
+        TaskFactory="RoslynCodeTaskFactory"
+        AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" >
+        <ParameterGroup>
+            <ConfigFilePath ParameterType="System.String" Required="true" />
+            <PluginsOut ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+        </ParameterGroup>
+        <Task>
+            <Using Namespace="System"/>
+            <Using Namespace="System.Collections.Generic"/>
+            <Using Namespace="System.IO"/>
+            <Using Namespace="System.Linq"/>
+            <Using Namespace="System.Text.RegularExpressions"/>
+            <Using Namespace="Microsoft.Build.Framework"/>
+            <Using Namespace="Microsoft.Build.Utilities"/>
+            <Code Type="Fragment" Language="cs">
+<![CDATA[
+if (!File.Exists(ConfigFilePath))
+    return true;
+
+var cfgFileStr = File.ReadAllText(ConfigFilePath);
+var cfgJson = cfgFileStr.Split(new string[]{"module.exports = "}, StringSplitOptions.None)[1];
+cfgJson = Regex.Replace(cfgJson, @"require\('(.*)'\)", "\"$1\"");
+var pluginsArrStr = Regex.Replace(cfgJson, @"(?:{.*plugins: \[)(.*)(?:\].*})", "$1", RegexOptions.Singleline);
+var plugins = pluginsArrStr.Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+
+var pluginsItems = new List<ITaskItem>(plugins.Count);
+
+foreach(var plugin in plugins)
+    pluginsItems.Add(new TaskItem(plugin.ToString()));
+
+PluginsOut = pluginsItems.ToArray();
+]]>
+            </Code>
+        </Task>
+    </UsingTask>
+
     <Target Name="CompileTailwindCSS" AfterTargets="BeforeBuild" Condition="@(TailwindCSS->Count()) > 0">
         <CallTarget Targets="CheckIfNodeJSIsInstalled" />
+
+        <GetTailwindPluginsList ConfigFilePath="$(ProjectDir)/tailwind.config.js">
+            <Output ItemName="Plugins" TaskParameter="PluginsOut" />
+        </GetTailwindPluginsList>
+
         <CallTarget Targets="InstallTailwindCSS" />
 
-        <Exec Command="node $(MSBuildThisFileDirectory)../index.js &quot;%(TailwindCSS.FullPath)&quot; &quot;%(TailwindCSS.RootDir)%(TailwindCSS.Directory)%(TailwindCSS.Filename).min.css&quot; &quot;$(ProjectDir.TrimEnd('\'))&quot;"
+        <Exec Command="npm install \%(Plugins.Identity) --silent"
+              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
+
+        <Exec Command="node $(MSBuildThisFileDirectory)../index.js &quot;%(TailwindCSS.FullPath)&quot; &quot;%(TailwindCSS.RootDir)%(TailwindCSS.Directory)%(TailwindCSS.Filename).min.css&quot; &quot;$(ProjectDir.TrimEnd('\'))&quot; [&quot;@(PluginList, '&quot;,&quot;')&quot;]"
               WorkingDirectory="$(MSBuildThisFileDirectory)../" />
     </Target>
 
@@ -25,7 +71,8 @@
         <Error Text="Node.js must be installed in order to generate tailwind css!" Condition="$(ExitCode) != 0" />
     </Target>
 
-    <Target Name="InstallTailwindCSS" Condition="!Exists('$(MSBuildThisFileDirectory)../node_modules')">
+    <Target Name="InstallTailwindCSS"
+            Condition="!Exists('$(MSBuildThisFileDirectory)../node_modules')">
         <Message Text="Installing required npm packages for tailwindcss" Importance="high" />
         
         <Exec Command="npm install postcss --silent"
