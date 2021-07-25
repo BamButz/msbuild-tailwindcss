@@ -15,7 +15,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="index.js">
+    <Content Include="package.json">
+      <PackagePath></PackagePath>
+    </Content>
+    <Content Include="postcss.config.js">
+      <PackagePath></PackagePath>
+    </Content>
+    <Content Include="tailwind.config.js.minimal">
       <PackagePath></PackagePath>
     </Content>
     <Content Include="Targets\BamButz.MSBuild.TailwindCSS.targets">
