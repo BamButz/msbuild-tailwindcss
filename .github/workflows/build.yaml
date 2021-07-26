@@ -31,10 +31,9 @@ jobs:
           node-version: '14'
       - name: Update npm to latest
         run: npm i npm@latest -g
-      - name: Set path for npm
-        run: |
-          echo "NodeCli=${{matrix.NODECLI}}" >> $GITHUB_ENV
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
+        env:
+            NodeCli: ${{matrix.NODECLI}}
         run: dotnet build
