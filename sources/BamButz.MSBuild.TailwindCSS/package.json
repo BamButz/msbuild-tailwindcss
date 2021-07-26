@@ -1,0 +1,24 @@
+{
+  "name": "BamButz.MSBuild.TailwindCSS",
+  "version": "1.2.3",
+  "description": "Adds a build action to process stylesheets through postcss/tailwind",
+  "keywords": [],
+  "author": "BamButz",
+  "license": "MIT",
+  "scripts": {
+    "postcss": "postcss"
+  },
+  "dependencies": {
+    "@tailwindcss/aspect-ratio": "latest",
+    "@tailwindcss/forms": "latest",
+    "@tailwindcss/line-clamp": "latest",
+    "@tailwindcss/typography": "latest",
+    "autoprefixer": "latest",
+    "cssnano": "latest",
+    "postcss": "latest",
+    "postcss-cli": "latest",
+    "postcss-import": "latest",
+    "postcss-nesting": "latest",
+    "tailwindcss": "latest"
+  }
+}

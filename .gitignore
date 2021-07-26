@@ -222,7 +222,6 @@ _Pvt_Extensions
 
 # ---> Node Package Manager
 package-lock.json
-package.json
 
 # TailwindCSS generated stylesheet
 sources/BamButz.MSBuild.TailwindCSS/Test/Tailwind.css
