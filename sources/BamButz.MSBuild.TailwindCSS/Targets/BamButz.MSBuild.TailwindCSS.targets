@@ -28,8 +28,7 @@
             BeforeTargets="Build;CompileTailwindCSS" >
         <CallTarget Targets="CheckIfNodeJSIsInstalled" />
 
-        <Exec Command="&quot;$(NodeCli)&quot; install"
-              WorkingDirectory="$(MSBuildThisFileDirectory)../" />
+        <Exec Command="&quot;$(NodeCli)&quot; install" />
     </Target>
 
     <Target Name="CompileTailwindCSS" Inputs="@(TailwindCSS);$(MSBuildProjectDirectory)/tailwind.config.js"
@@ -48,8 +47,7 @@
 
         <Message Text="PostCssCompile: Compiling %(TailwindCSS.FullPath)" Importance="high" />
         <Exec
-            Command="&quot;$(NodeCli)&quot; $(PostCssRunner) &quot;%(TailwindCSS.FullPath)&quot; --config &quot;$(MSBuildThisFileDirectory)../&quot; $(PostCssCli) &quot;%(TailwindCSS.RootDir)%(TailwindCSS.Directory)%(TailwindCSS.Filename).min.css&quot; "
-            WorkingDirectory="$(MSBuildThisFileDirectory)../" />
+            Command="&quot;$(NodeCli)&quot; $(PostCssRunner) &quot;%(TailwindCSS.FullPath)&quot; --config &quot;$(MSBuildThisFileDirectory)../&quot; $(PostCssCli) &quot;%(TailwindCSS.RootDir)%(TailwindCSS.Directory)%(TailwindCSS.Filename).min.css&quot; " />
     </Target>
 
     <Target Name="TailwindCSSClean" BeforeTargets="Clean">

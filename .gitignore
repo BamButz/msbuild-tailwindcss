@@ -225,3 +225,5 @@ package-lock.json
 
 # TailwindCSS generated stylesheet
 sources/BamButz.MSBuild.TailwindCSS/Test/Tailwind.css
+sources/BamButz.MSBuild.TailwindCSS/tailwind.config.js
+sources/BamButz.MSBuild.TailwindCSS/Test/Tailwind.min.css
