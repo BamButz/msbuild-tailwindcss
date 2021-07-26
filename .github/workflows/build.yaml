@@ -14,6 +14,13 @@ jobs:
     strategy:
         matrix:
             os: [ubuntu-latest, windows-latest, macos-latest]
+            include:
+              - os: ubuntu-latest
+                NODECLI: npm
+              - os: windows-latest
+                NODECLI: c:\npm\prefix\npm
+              - os: macos-latest
+                NODECLI: npm
     steps:
       - uses: actions/checkout@v2
       - name: Setup .NET
@@ -24,6 +31,9 @@ jobs:
           node-version: '14'
       - name: Update npm to latest
         run: npm i npm@latest -g
+      - name: Set path for npm
+        run: |
+          echo "NodeCli=${{matrix.NODECLI}}" >> $GITHUB_ENV
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
