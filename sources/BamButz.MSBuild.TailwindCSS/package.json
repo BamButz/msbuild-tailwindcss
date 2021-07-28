@@ -9,6 +9,10 @@
     "postcss": "postcss"
   },
   "dependencies": {
+    "@tailwindcss/aspect-ratio": "latest",
+    "@tailwindcss/forms": "latest",
+    "@tailwindcss/line-clamp": "latest",
+    "@tailwindcss/typography": "latest",
     "autoprefixer": "latest",
     "cssnano": "latest",
     "postcss": "latest",
