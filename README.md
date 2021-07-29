@@ -24,13 +24,13 @@ Simply set the build action of your stylesheet to TailwindCSS during build the e
 
 I set up a test file in the project so that you can understand the usage.
 
-## Custom Configuration
+## Tailwind Configuration
 
-If you need to use a custom configuration, you can simply create a tailwind.config.js in the same directory as your project file (.csproj).
+A tailwind.config.js must exist in the same directory as your project file (.csproj). During the first build of your project after adding this extension, a minimal tailwind.config.js will be added to your project if one is not already present. This allows the [incremental build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-build-incrementally?view=vs-2019) process to work. Each change you make to this file will result in a rebuild of your css files.
 
 ## Plugins
 
-If you want to use any of the [official tailwindcss plugins](https://tailwindcss.com/docs/plugins#official-plugins) you can simply specify them in your tailwind.config.js file (see example below) and they will automatically be installed at the next build.
+If you want to use any of the [official tailwindcss plugins](https://tailwindcss.com/docs/plugins#official-plugins) you can simply specify them in your tailwind.config.js file (see example below) and they will automatically be included in your compiled css.
 
 ```js
 // tailwind.config.js
